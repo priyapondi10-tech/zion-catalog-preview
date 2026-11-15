@@ -1,0 +1,20 @@
+[
+  {
+    "name": "LLM KV Cache Planner",
+    "repository": "priyapondi10-tech/llm-kv-cache-planner",
+    "url": "https://priyapondi10-tech.github.io/llm-kv-cache-planner/",
+    "description": "Estimate decoder-model KV-cache memory and context capacity from explicit architecture inputs."
+  },
+  {
+    "name": "Retry & Backoff Lab",
+    "repository": "priyapondi10-tech/retry-backoff-lab",
+    "url": "https://priyapondi10-tech.github.io/retry-backoff-lab/",
+    "description": "Compare bounded retry schedules, jitter ranges, and total time budgets without sending requests."
+  },
+  {
+    "name": "Webhook Signature Lab",
+    "repository": "priyapondi10-tech/webhook-signature-lab",
+    "url": "https://priyapondi10-tech.github.io/webhook-signature-lab/",
+    "description": "Generate and verify raw-payload HMAC-SHA256 signatures locally with test secrets."
+  }
+]
