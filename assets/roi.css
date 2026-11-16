@@ -1,0 +1,32 @@
+/* Scoped to the calculator so the inherited homepage and advisor stay unchanged. */
+#roi { scroll-margin-top: 8rem; }
+#roi .roi-notice { border-left: 4px solid #c4b5fd; padding: .8rem 1rem; margin: 1rem 0; background: #17142e; }
+#roi .roi-layout { align-items: start; margin-top: 1.25rem; }
+#roi fieldset { min-width: 0; border: 0; padding: 0; margin: 1rem 0; }
+#roi legend { color: #fff; font-weight: 700; }
+#roi label, #roi .roi-help, #roi .roi-error { font-size: .9rem; }
+#roi .roi-help { color: #cbd5e1; margin: .3rem 0; }
+#roi .roi-field { margin: 1rem 0; }
+#roi .roi-controls { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; }
+#roi .roi-controls input[type=number] { width: 8rem; max-width: 100%; }
+#roi .roi-controls input[type=range] { flex: 1 1 7rem; min-width: 0; padding: .5rem 0; accent-color: #c4b5fd; }
+#roi button { font: inherit; cursor: pointer; border: 1px solid #64748b; background: #17243a; color: #fff; padding: .65rem .8rem; border-radius: .6rem; min-height: 44px; }
+#roi button[aria-pressed=true] { border-color: #ddd6fe; background: #4c1d95; }
+#roi button:disabled { cursor: not-allowed; opacity: .55; }
+#roi :is(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid #67e8f9; outline-offset: 3px; }
+#roi .roi-error { color: #fecaca; }
+#roi input[aria-invalid=true] { border-color: #fca5a5; }
+#roi .roi-results { display: grid; grid-template-columns: minmax(0, 1fr) minmax(5rem, auto); gap: .6rem 1rem; margin: 1rem 0; }
+#roi .roi-results dd { text-align: right; overflow-wrap: anywhere; font-weight: 700; }
+#roi .roi-results dt { color: #cbd5e1; }
+#roi .roi-results .roi-total { border-top: 1px solid #64748b; padding-top: .65rem; }
+#roi [data-negative=true] #net { color: #fecaca; }
+#roi .roi-links { margin: 1rem 0; }
+#roi .roi-links a { display: inline-block; margin: .3rem 1rem .3rem 0; text-decoration: underline; }
+#roi .roi-summary { width: 100%; color: #fff; background: #0f172a; padding: .75rem; border: 1px solid #64748b; }
+#roi .roi-method { margin-top: 1rem; }
+#roi .roi-method p { color: #cbd5e1; }
+#roi .roi-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 480px) { #roi .roi-results { grid-template-columns: minmax(0, 1fr); gap: .2rem; } #roi .roi-results dd { text-align: left; margin-bottom: .6rem; } #roi .roi-results dd.roi-total { border-top: 0; padding-top: 0; } }
+@media (prefers-reduced-motion: reduce) { html:has(#roi) { scroll-behavior: auto; } }
+@media print { #roi button, #roi input[type=range], #roi .roi-links { display: none; } #roi { break-inside: auto; } }
