@@ -67,7 +67,10 @@
     .hidden { display: none !important; }
     @media (max-width: 800px) { .nav-links { display: none; } }
   </style>
-<meta content="noindex,nofollow" name="robots"/></head>
+<meta content="noindex,nofollow" name="robots"/>
+<link rel="stylesheet" href="./assets/roi.css"/>
+<script src="./assets/roi.js" defer=""></script>
+</head>
 <body><aside aria-label="Staging deployment notice" style="background:#163c4e;color:#e2faff;border-bottom:2px solid #67e8f9;padding:1rem;text-align:center"><strong>STAGING PREVIEW — NOT THE PRODUCTION SITE</strong><br/>Hosted by <a href="https://github.com/priyapondi10-tech" style="color:#a5f3fc">priyapondi10-tech</a>. The three engineering tools below use this account’s GitHub Pages. Other catalog links open the original Zion site. No production forms or payments are processed here. <a href="#prepared-engineering-tools" style="color:#a5f3fc">Jump to the three tools ↓</a></aside>
 <a class="skip" href="#main-content">Skip to main content</a>
 <a class="skip" href="#site-navigation">Skip to navigation</a>
@@ -83,6 +86,7 @@
 <a href="https://ziontechgroup.com/solutions/">Solutions</a>
 <a href="https://ziontechgroup.com/services/">Services</a>
 <a href="https://ziontechgroup.com/pricing/">Pricing</a>
+<a href="#roi">ROI planner</a>
 <a href="https://ziontechgroup.com/ai-services/">AI Services</a>
 <a href="https://ziontechgroup.com/products/">Products</a>
 <a href="https://ziontechgroup.com/about/">Company</a>
@@ -285,39 +289,110 @@
 <div class="stat card"><b>500+</b>Enterprise Deployments</div>
 <div class="stat card"><b>99.9%</b>Platform Uptime</div>
 <div class="stat card"><b>&lt; 48h</b>Average Kickoff Time</div>
-<div class="stat card"><b>3.2x</b>Average ROI</div>
+<div class="stat card"><b>Scenario-based</b>ROI planning — not a guarantee</div>
 <div class="stat card"><b>76+</b>AI Applications</div>
 <div class="stat card"><b>43</b>Industry Verticals</div>
 </div>
 </section>
-<section class="wrap" id="roi">
-<p class="section-kicker">Interactive Planning</p>
-<h2>Estimate your AI delivery upside in minutes</h2>
-<p class="lede">Use this estimator to model potential impact from your first production automation rollout.</p>
-<div class="grid g2">
-<div class="card">
-<label>Team members in the workflow <span id="peopleVal">22</span></label>
-<input id="people" max="80" min="2" type="range" value="22"/>
-<label>Average blended hourly cost $<span id="rateVal">58</span></label>
-<input id="rate" max="200" min="20" type="range" value="58"/>
-<label>Hours/week per person that can be automated <span id="hoursVal">6</span></label>
-<input id="hours" max="20" min="1" type="range" value="6"/>
-<label>Expected automation coverage <span id="coverVal">35</span>%</label>
-<input id="cover" max="80" min="5" type="range" value="35"/>
-<label>Estimated implementation investment $<span id="investVal">18000</span></label>
-<input id="invest" max="80000" min="5000" step="1000" type="range" value="18000"/>
+<section class="wrap" id="roi" aria-labelledby="roi-title">
+<p class="section-kicker">Interactive ROI planning · USD</p>
+<h2 id="roi-title">Estimate the value and cost of your first automation</h2>
+<p class="lede">Model recovered time, ongoing costs and payback using your own assumptions. Recovered labor capacity is not necessarily cash savings.</p>
+<div class="roi-notice" id="roi-benchmark-note"><strong>Illustrative planning benchmarks — not verified customer results.</strong> The example targets 15–20 hours recovered per week at $65/hour, with $2,500 upfront and a $250/month maintenance allowance. These are planning inputs, not measured “typical customer” benchmarks, a quote or a performance guarantee.</div>
+<noscript><p class="roi-notice">JavaScript is required for live calculations and local exports. The assumptions and methodology below remain readable; no result is shown until the calculator runs.</p></noscript>
+<div class="grid g2 roi-layout">
+<form class="card" id="roi-form" aria-labelledby="roi-inputs-title" novalidate="">
+<h3 id="roi-inputs-title">Your workflow and costs</h3>
+<fieldset><legend>Illustrative saved-hours scenarios</legend>
+<div class="row"><button type="button" data-scenario="15" aria-pressed="false">15 hrs/week</button><button type="button" data-scenario="17.5" aria-pressed="true">17.5 hrs/week</button><button type="button" data-scenario="20" aria-pressed="false">20 hrs/week</button></div>
+<p class="roi-help">Scenarios set 10 people × 2.5 eligible hours/person/week, $65/hour and 60%, 70% or 80% coverage. They leave your costs unchanged.</p>
+</fieldset>
+<fieldset><legend>Workload and coverage</legend>
+<div class="roi-field">
+<label id="people-label" for="people">Team members in this workflow (people)</label>
+<div class="roi-controls"><input id="people" name="people" type="number" min="1" max="500" step="1" value="10" required="" aria-describedby="people-help people-error"/>
+<input id="people-range" type="range" min="1" max="500" step="1" value="10" aria-labelledby="people-label" aria-describedby="people-help"/></div>
+<p class="roi-help" id="people-help">Count only people doing this workflow; range 1–500.</p>
+<p class="roi-error" id="people-error"></p>
 </div>
-<div class="card">
-<h3>AI ROI Snapshot</h3>
-<p>Monthly hours saved <b id="mHours">200 hrs</b></p>
-<p>Monthly savings <b id="mSave">$11,603</b></p>
-<p>Annual savings <b id="ySave">$139,232</b></p>
-<p>Year-one net impact <b id="net">$121,232</b></p>
-<p>Estimated payback window <b id="payback">1.6 months</b></p>
-<p class="muted" id="roiLine">Approximate ROI after year one: 674%</p>
-<div class="row"><a class="btn btn-primary" href="https://ziontechgroup.com/contact/">Send this estimate to Zion</a></div>
+<div class="roi-field">
+<label id="rate-label" for="rate">Blended hourly labor cost (USD/hour)</label>
+<div class="roi-controls"><input id="rate" name="rate" type="number" min="0" max="1000" step=".01" value="65" required="" aria-describedby="rate-help rate-error"/>
+<input id="rate-range" type="range" min="0" max="1000" step=".01" value="65" aria-labelledby="rate-label" aria-describedby="rate-help"/></div>
+<p class="roi-help" id="rate-help">Use a fully loaded hourly cost. $65/hour is illustrative, not a verified customer average.</p>
+<p class="roi-error" id="rate-error"></p>
+</div>
+<div class="roi-field">
+<label id="hours-label" for="hours">Eligible workflow time per person (hours/week)</label>
+<div class="roi-controls"><input id="hours" name="hours" type="number" min="0" max="40" step=".25" value="2.5" required="" aria-describedby="hours-help hours-error"/>
+<input id="hours-range" type="range" min="0" max="40" step=".25" value="2.5" aria-labelledby="hours-label" aria-describedby="hours-help"/></div>
+<p class="roi-help" id="hours-help">Time currently spent on the workflow BEFORE applying coverage. Do not enter hours already saved.</p>
+<p class="roi-error" id="hours-error"></p>
+</div>
+<div class="roi-field">
+<label id="cover-label" for="cover">Realizable automation coverage (%)</label>
+<div class="roi-controls"><input id="cover" name="cover" type="number" min="0" max="100" step="1" value="70" required="" aria-describedby="cover-help cover-error"/>
+<input id="cover-range" type="range" min="0" max="100" step="1" value="70" aria-labelledby="cover-label" aria-describedby="cover-help"/></div>
+<p class="roi-help" id="cover-help">The share of eligible time expected to be recovered after human review and adoption; 0% is valid.</p>
+<p class="roi-error" id="cover-error"></p>
+</div>
+</fieldset>
+<fieldset><legend>Implementation and ongoing costs</legend>
+<label for="roi-plan">Cost context (all USD)</label>
+<select id="roi-plan" aria-describedby="roi-plan-note"><option value="starter">Starter illustration — $2,500 upfront + $250/month allowance</option><option value="growth">Growth illustration — $8,000/month retainer</option><option value="custom">Custom costs / your quote</option></select>
+<p class="roi-help" id="roi-plan-note">Starter is published at $2,500 upfront. The $250/month maintenance allowance is illustrative and is not a published fee.</p>
+<div class="roi-field">
+<label id="invest-label" for="invest">Upfront implementation cost (USD)</label>
+<div class="roi-controls"><input id="invest" name="invest" type="number" min="0" max="1000000" step="1" value="2500" required="" aria-describedby="invest-help invest-error"/></div>
+<p class="roi-help" id="invest-help">Include setup, integration and training. Starter is published at $2,500 USD; your scope may differ.</p>
+<p class="roi-error" id="invest-error"></p>
+</div>
+<div class="roi-field">
+<label id="ongoing-label" for="ongoing">Ongoing costs (USD/month)</label>
+<div class="roi-controls"><input id="ongoing" name="ongoing" type="number" min="0" max="100000" step="1" value="250" required="" aria-describedby="ongoing-help ongoing-error"/></div>
+<p class="roi-help" id="ongoing-help">$250/month is an illustrative maintenance allowance, not a published fee. Add software, APIs, hosting and other running costs.</p>
+<p class="roi-error" id="ongoing-error"></p>
+</div>
+</fieldset>
+<p class="roi-error" id="roi-errors" role="alert" hidden="">Correct the highlighted inputs to calculate or export an estimate.</p>
+<button id="roi-reset" type="button">Reset illustrative defaults</button>
+</form>
+<div class="card" id="roi-results" role="region" aria-labelledby="roi-results-title">
+<h3 id="roi-results-title">Modeled value and costs</h3>
+<p class="roi-help">Full run rate from month one. Values are estimates of capacity, not a cash-savings promise.</p>
+<dl class="roi-results">
+<dt>Hours recovered / week</dt><dd id="wHours">—</dd>
+<dt>Hours recovered / month</dt><dd id="mHours">—</dd>
+<dt>Gross labor capacity value / month</dt><dd id="mSave">—</dd>
+<dt>Ongoing costs / month</dt><dd id="monthlyCosts">—</dd>
+<dt class="roi-total">Net capacity value / month</dt><dd class="roi-total" id="monthlyNet">—</dd>
+<dt>Gross labor capacity value / year</dt><dd id="ySave">—</dd>
+<dt>Upfront implementation</dt><dd id="upfrontCost">—</dd>
+<dt>Ongoing costs / year</dt><dd id="yearRecurring">—</dd>
+<dt class="roi-total">Total modeled year-one cost</dt><dd class="roi-total" id="yearCosts">—</dd>
+<dt>Year-one net capacity value</dt><dd id="net">—</dd>
+<dt>Year-one ROI on total cost</dt><dd id="roiLine">—</dd>
+<dt>Simple payback at full run rate</dt><dd id="payback">—</dd>
+</dl>
+<p class="roi-help">Negative net value means modeled costs exceed the recovered labor value. No payback is shown when ongoing costs meet or exceed monthly value.</p>
+<div class="row"><button type="button" id="roi-copy" disabled="">Copy estimate</button><button type="button" id="roi-download" disabled="">Download text summary</button></div>
+<p class="roi-help" id="roi-action-status" role="status" aria-live="polite"></p>
+<label class="roi-sr-only" for="roi-summary">Local estimate summary — select and copy manually</label>
+<textarea class="roi-summary" id="roi-summary" rows="10" readonly="" hidden=""></textarea>
+<p class="roi-help">Calculations and exports stay in your browser. No estimate is automatically sent or included in a link.</p>
+<div class="roi-links"><a href="https://ziontechgroup.com/discovery/">Scope your workflow — Free Discovery (production site)</a><a href="https://ziontechgroup.com/plans/">View published plans (production site)</a><a href="https://ziontechgroup.com/contact/">Discuss an estimate (production site; copy it first)</a><a href="#faq">Planning FAQ on this page</a></div>
 </div>
 </div>
+<p class="roi-sr-only" id="roi-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="roi-method"><summary>Assumptions, formulas and limitations</summary>
+<p>Weekly recovered hours = people × eligible workflow hours/person/week × coverage ÷ 100. Monthly hours = weekly hours × 52 ÷ 12. Coverage is applied once; eligible hours must be entered before automation.</p>
+<p>Monthly gross labor value = monthly recovered hours × hourly cost. Monthly net capacity value = monthly gross value − ongoing monthly costs. Annual gross value = weekly recovered hours × 52 × hourly cost.</p>
+<p>Total modeled year-one cost = upfront implementation + 12 × monthly ongoing costs. Year-one net capacity value = annual gross value − total modeled year-one cost. Year-one ROI = net capacity value ÷ total modeled year-one cost × 100; it is undefined when modeled cost is zero.</p>
+<p>Simple payback = upfront implementation ÷ positive net monthly capacity value. With positive net value and no upfront cost, payback is immediate; with nonpositive net monthly value there is no modeled payback. Values beyond 12 months are outside year one. Very short positive paybacks display as &lt;0.1 months, not zero.</p>
+<p>This is a simplified, undiscounted full-run-rate model, not a complete financial forecast. It excludes ramp-up, implementation delays, taxes, financing, discounting, cash realization and any costs you do not enter. Include all relevant ongoing costs. Values are rounded for display only; calculations use unrounded numbers. All amounts are USD; there is no FX conversion.</p>
+<p><strong>Sources and review date: <time datetime="2026-11-16">November 16, 2026</time>.</strong> The 15–20 hours/week, $65/hour and $250/month figures were supplied for an illustrative planning example, not derived from customer measurements. The 17.5-hour midpoint uses 10 people × 2.5 eligible hours × 70% coverage.</p>
+<p><a href="https://ziontechgroup.com/plans/">Published USD plan reference (production site)</a>: Free Discovery maps scope; Consulting ($499) is advisory, not automation implementation; Starter is $2,500; Growth is $8,000/month. The $250 maintenance allowance is not a published plan price. Growth's $0 setup entry is an editable assumption, not an offer. Confirm current prices, scope and any extra costs with the team.</p>
+</details>
 </section>
 <section class="wrap" id="advisor">
 <p class="section-kicker">Launch advisor</p>
@@ -352,7 +427,7 @@
 <h2>Experience-led design with execution-ready delivery</h2>
 <div class="grid g4">
 <div class="card"><h3>01 Operationally Grounded</h3><p>Every app and service page is mapped to practical business workflows, not generic demos.</p></div>
-<div class="card"><h3>02 Integration-Ready</h3><p>We design for existing systems, data pipelines, and team handoffs from day one.</p></div>
+<div class="card"><h3>02 Integration-Ready</h3><p>We design for existing systems, APIs, data pipelines, and team handoffs from day one.</p></div>
 <div class="card"><h3>03 Secure by Default</h3><p>Security, privacy, and compliance requirements are built into delivery planning.</p></div>
 <div class="card"><h3>04 Outcome-Focused</h3><p>Roadmaps are prioritized around measurable gains in speed, quality, and operating cost.</p></div>
 </div>
@@ -549,6 +624,7 @@
 <div>
 <strong>Resources</strong>
 <a href="https://ziontechgroup.com/pricing/">Pricing</a>
+<a href="#roi">ROI planner</a>
 <a href="https://ziontechgroup.com/services/">Services</a>
 <a href="https://ziontechgroup.com/solutions/">Solutions</a>
 <a href="https://ziontechgroup.com/privacy/">Privacy</a>
@@ -558,41 +634,7 @@
 <p class="muted" style="text-align:center;margin-top:2rem">© 2026 Zion Tech Group. All rights reserved.</p>
 </footer>
 <script>
-    function money(n){return n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});}
-    function calc(){
-      const people=+peopleEl.value, rate=+rateEl.value, hours=+hoursEl.value, cover=+coverEl.value/100, invest=+investEl.value;
-      peopleVal.textContent=people; rateVal.textContent=rate; hoursVal.textContent=hours; coverVal.textContent=Math.round(cover*100); investVal.textContent=invest;
-      const monthlyHours=people*hours*4.33*cover;
-      const monthly=monthlyHours*rate;
-      const annual=monthly*12;
-      const net=annual-invest;
-      const pay=monthly>0?invest/monthly:0;
-      const roi=invest>0?(net/invest)*100:0;
-      mHours.textContent=Math.round(monthlyHours)+' hrs';
-      mSave.textContent=money(monthly);
-      ySave.textContent=money(annual);
-      netEl.textContent=money(net);
-      payback.textContent=pay.toFixed(1)+' months';
-      roiLine.textContent='Approximate ROI after year one: '+Math.round(roi)+'%';
-    }
-    const peopleEl=document.getElementById('people');
-    const rateEl=document.getElementById('rate');
-    const hoursEl=document.getElementById('hours');
-    const coverEl=document.getElementById('cover');
-    const investEl=document.getElementById('invest');
-    const peopleVal=document.getElementById('peopleVal');
-    const rateVal=document.getElementById('rateVal');
-    const hoursVal=document.getElementById('hoursVal');
-    const coverVal=document.getElementById('coverVal');
-    const investVal=document.getElementById('investVal');
-    const mHours=document.getElementById('mHours');
-    const mSave=document.getElementById('mSave');
-    const ySave=document.getElementById('ySave');
-    const netEl=document.getElementById('net');
-    const payback=document.getElementById('payback');
-    const roiLine=document.getElementById('roiLine');
-    [peopleEl,rateEl,hoursEl,coverEl,investEl].forEach(el=>el.addEventListener('input',calc));
-    calc();
+    // Preserve the adjacent launch advisor's readiness interaction.
     document.getElementById('ready').addEventListener('input',e=>{document.getElementById('readyVal').textContent=e.target.value;});
   </script>
 <p><a class="finops-promo-link" href="https://ziontechgroup.com/apps/finops-scenario-estimator.html">FinOps AI Estimator</a></p>
@@ -624,9 +666,9 @@
 <h3>AI Automation Platform</h3>
 <p>Autonomous workflows across support, sales, and ops.</p>
 </a>
-<a class="card" href="https://ziontechgroup.com/tools/roi-calculator/" style="text-decoration:none;color:inherit">
+<a class="card" href="#roi" style="text-decoration:none;color:inherit">
 <h3>ROI Calculator</h3>
-<p>Estimate payback and TCO of AI and IT projects.</p>
+<p>Model labor value, project costs and payback using your assumptions.</p>
 </a>
 <a class="card" href="https://ziontechgroup.com/tools/ai-service-router/" style="text-decoration:none;color:inherit">
 <h3>AI Service Router</h3>
@@ -665,10 +707,10 @@
 <h3>FinOps Autopilot</h3>
 <p>Cloud cost anomaly detection &amp; rightsizing.</p>
 </a>
-<a class="card" href="https://ziontechgroup.com/roi-calc/">
+<a class="card" href="#roi">
 <div class="g">Money</div>
 <h3>ROI Calculator</h3>
-<p>Hours leaked vs Discovery / Consulting / Starter.</p>
+<p>Model recovered hours, ongoing costs and year-one ROI.</p>
 </a>
 <a class="card" href="https://ziontechgroup.com/zion-ai-chatbot-builder/">
 <div class="g">AI</div>
